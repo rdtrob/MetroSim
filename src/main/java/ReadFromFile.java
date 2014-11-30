@@ -10,7 +10,7 @@ public class ReadFromFile {
     private String readFile(String pathname) throws IOException {
 
         File file = new File(pathname);
-        //pathname = "/mnt/storage/devel/MetroSim/resources/stations.txt"
+        //path == "/mnt/storage/devel/MetroSim/src/main/resources/stations.txt"
         StringBuilder fileContents = new StringBuilder((int) file.length());
         Scanner scanner = new Scanner(file);
         String lineSeparator = System.getProperty("line.separator");

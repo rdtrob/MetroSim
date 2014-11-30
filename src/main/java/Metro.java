@@ -55,7 +55,6 @@ public class Metro implements Graph {
             } else
                 j++;
         }
-
         return j;
     }
 

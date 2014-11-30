@@ -1,5 +1,5 @@
 /**
- * Created by robert on 11/28/14.
+ * Created by robert on 11/24/14.
  */
 
 public class RouteHandler {
@@ -29,7 +29,7 @@ public class RouteHandler {
     private void findAll(Route route, Node A, Node B) {
         route.addLocation(A);
         if (A == B) {
-            OutputDevice printer = new OutputDevice();
+            OutputHandler printer = new OutputHandler();
             printer.print(route);
         } else {
             for (Edge i : A.getLines()) {

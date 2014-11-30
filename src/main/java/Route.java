@@ -1,5 +1,5 @@
 /**
- * Created by robert on 11/28/14.
+ * Created by robert on 11/24/14.
  */
 
 import java.util.LinkedList;
@@ -10,15 +10,15 @@ import java.util.LinkedList;
 public class Route {
     private LinkedList<Edge> lines;
     private LinkedList<Node> locations;
-    private int averageSpeed = 1000;    // could be float for better accuracy
-    private int distance = 1000;        // total distance from point A to point B
-    private int cost = 1000;            // total cost from point A to point B
+    private int averageSpeed = 100;    // could be float for better accuracy
+    private int distance = 100;        // total distance from point A to point B
+    private int cost = 100;            // total cost from point A to point B
 
     public Route() {
         this.lines = new LinkedList<Edge>();
         this.locations = new LinkedList<Node>();
     }
-
+/*
     public Route(Route copy) {
         for (Edge i : copy.getLines())
             this.lines.add(new Line(i));
@@ -27,7 +27,7 @@ public class Route {
         this.averageSpeed = copy.averageSpeed;
         this.distance = copy.distance;
         this.cost = copy.cost;
-    }
+    }*/
 
     public void addLocation(Node location) {
         this.locations.addLast(location);
@@ -92,24 +92,24 @@ public class Route {
     }
 
     public String toString() {
-        StringBuilder printable = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         if (this.getLines().isEmpty()) {
             /**
              * TODO
              */
         } else {
             for (Edge i : this.getLines()) {
-                printable.append(i.getSource().getName() + " -> ");
+                stringBuilder.append(i.getSource().getName() + " -> ");
                 if (i.equals(this.getLines().getLast()))
-                    printable.append(this.getLines().getLast().getDestination().getName());
+                    stringBuilder.append(this.getLines().getLast().getDestination().getName());
             }
-            printable.append("\nAverage speed of " + this.getRouteWeight(0));
-            printable.append("\nDistance of " + this.getRouteWeight(1));
-            printable.append("\nTotal cost of " + this.getRouteWeight(2) + " \n\n");
+            stringBuilder.append("\nAverage speed " + this.getRouteWeight(0) + "km/h\n");
+            stringBuilder.append("\nDistance: " + this.getRouteWeight(1) + "km\n");
+            stringBuilder.append("\nTotal cost: " + this.getRouteWeight(2) + "Ron\n\n");
         }
         this.averageSpeed = 0;
         this.distance = 0;
         this.cost = 0;
-        return printable.toString();
+        return stringBuilder.toString();
     }
 }

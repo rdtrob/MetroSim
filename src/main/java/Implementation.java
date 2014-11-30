@@ -1,14 +1,8 @@
 /**
- * Created by robert on 11/28/14.
+ * Created by robert on 11/24/14.
  */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Implementation {
     private final List<Edge> edges;
@@ -58,7 +52,7 @@ public class Implementation {
                 return edge.getWeight(type);
             }
         }
-        throw new RuntimeException("Should not happen");
+        throw new RuntimeException("Exception");
     }
 
     private List<Node> getNeighbors(Node node) {

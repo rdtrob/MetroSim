@@ -1,31 +1,30 @@
 /**
- * Created by robert on 11/28/14.
+ * Created by robert on 11/24/14.
  */
 
-class Controller {
+public class Main {
     public static void main(String args[]) {
         String cmd = "";
         Graph map;
         GraphCreator mapCreator = new GraphCreator();
-        RouteHandler planner = new RouteHandler();
+        RouteHandler routeHandler = new RouteHandler();
         mapCreator.createDefaultMap();
         map = mapCreator.getGraph();
         Implementation dijkstra = new Implementation(map);
         Route route = new Route();
         InputDevice keyboard = new InputDevice();
-        OutputDevice printer = new OutputDevice();
-        Parser simulator = new Parser();
+        OutputHandler printer = new OutputHandler();
+        Parser parser = new Parser();
         printer.printString("\n");
         printer.printString("Metro system planner \n");
-        printer.printString("Here's a list of what you can do: \n");
+        printer.printString("Available commands: \n");
         while (cmd.contentEquals("5") != true) {
             printer.printString("\n");
-            printer.printString("1 View all location names \n");
-            printer.printString("2 View all connections from point A to point B \n");
-            printer.printString("3 Get the fastest/shortest/cheapest connection from point A to point B \n");
-            printer.printString("4 Simulate the travel from on location to another \n");
-            printer.printString("5 Exit \n");
-            printer.printString("What would you like to do? \n");
+            printer.printString("1. Print locations \n");
+            printer.printString("2. Print routes \n");
+            printer.printString("3. Get the fastest/shortest/cheapest route \n");
+            printer.printString("4. Simulate \n");
+            printer.printString("5. Exit \n");
             cmd = keyboard.getKeyboardInput();
             switch (cmd) {
                 case "1":
@@ -37,21 +36,21 @@ class Controller {
                     printer.printString("Input current location: ");
                     cmd = keyboard.getKeyboardInput();
                     if (map.containsNodeName(cmd) == true) {
-                        planner.setStartLocation(map.getNode(map.mapNodeToIndex(cmd)));
+                        routeHandler.setStartLocation(map.getNode(map.mapNodeToIndex(cmd)));
                         printer.printString("\nInput destination: ");
                         cmd = keyboard.getKeyboardInput();
                         if (map.containsNodeName(cmd) == true) {
-                            planner.setEndLocation(map.getNode(map.mapNodeToIndex(cmd)));
-                            printer.printString("\nAll available connections:\n\n");
-                            planner.findAllConnections();
+                            routeHandler.setEndLocation(map.getNode(map.mapNodeToIndex(cmd)));
+                            printer.printString("\nAvailable connections:\n\n");
+                            routeHandler.findAllConnections();
                         } else
-                            printer.print("Not an available location \n");
+                            printer.print("Location unavailable \n");
                     } else
-                        printer.print("Not an available location \n");
+                        printer.print("Location unavailable \n");
                     break;
                 case "3":
                     int type = 0;
-                    printer.printString("Which type of connection would you like to get? (fastest/shortest/cheapest)\n");
+                    printer.printString("Would you like to know the quickest, shortest or cheapest route? \n");
                     cmd = keyboard.getKeyboardInput();
                     switch (cmd) {
                         case "quickest":
@@ -65,42 +64,42 @@ class Controller {
                             break;
                         default:
                             //Logger
-                            printer.printString("Not a valid connection /n");
+                            printer.printString("Invalid route /n");
                             break;
                     }
                     printer.printString("Input current location: ");
                     cmd = keyboard.getKeyboardInput();
                     if (map.containsNodeName(cmd) == true) {
-                        planner.setStartLocation(map.getNode(map.mapNodeToIndex(cmd)));
+                        routeHandler.setStartLocation(map.getNode(map.mapNodeToIndex(cmd)));
                         dijkstra.execute(map.getNode(map.mapNodeToIndex(cmd)), type);
                         printer.printString("\nInput destination: ");
                         cmd = keyboard.getKeyboardInput();
                         if (map.containsNodeName(cmd) == true) {
-                            planner.setEndLocation(map.getNode(map.mapNodeToIndex(cmd)));
+                            routeHandler.setEndLocation(map.getNode(map.mapNodeToIndex(cmd)));
                             route = dijkstra.getPath(map.getNode(map.mapNodeToIndex(cmd)), type, route);
                             printer.printString("Connection: \n");
                             printer.print(route);
                         } else
-                            printer.print("Unavailable location \n");
+                            printer.print("Location unavailable \n");
                     } else
-                        printer.print("Unavailable location \n");
+                        printer.print("Location unavailable \n");
                     break;
                 case "4":
                     printer.printString("Input current location: ");
                     cmd = keyboard.getKeyboardInput();
                     if (map.containsNodeName(cmd) == true) {
-                        planner.setStartLocation(map.getNode(map.mapNodeToIndex(cmd)));
+                        routeHandler.setStartLocation(map.getNode(map.mapNodeToIndex(cmd)));
                         dijkstra.execute(map.getNode(map.mapNodeToIndex(cmd)), 1);
                         printer.printString("\nInput destination: ");
                         cmd = keyboard.getKeyboardInput();
                         if (map.containsNodeName(cmd) == true) {
-                            planner.setEndLocation(map.getNode(map.mapNodeToIndex(cmd)));
+                            routeHandler.setEndLocation(map.getNode(map.mapNodeToIndex(cmd)));
                             route = dijkstra.getPath(map.getNode(map.mapNodeToIndex(cmd)), 1, route);
-                            simulator.simulate(route);
+                            parser.parse(route);
                         } else
-                            printer.print("Unavailable location \n");
+                            printer.print("Location unavailable \n");
                     } else
-                        printer.print("Unavailable location \n");
+                        printer.print("Location unavailable \n");
                     break;
                 case "5":
                     break;

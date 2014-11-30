@@ -1,3 +1,7 @@
+/**
+ * Created by robert on 11/24/14.
+ */
+
 public class Line implements Edge {
     private Node source;
     private Node destination;

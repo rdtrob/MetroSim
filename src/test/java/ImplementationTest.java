@@ -1,5 +1,5 @@
 /**
- * Created by robert on 11/30/14.
+ * Created by robert on 11/25/14.
  */
 
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class ImplementationTest {
     private List<Edge> edges;
 
     @Test
-    public void testExcute() {
+    public void testExecute() {
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
         for (int i = 0; i < 11; i++) {
@@ -56,10 +56,10 @@ public class ImplementationTest {
 
     private void addLane(String laneId, int sourceLocNo, int destLocNo,
                          int duration) {
-        Graph lane = new Graph(laneId, nodes.get(), nodes.get(), duration) {
+        Graph laney = new Graph() {
             @Override
             public void addNode(Node node) {
-                //TODO
+                //
             }
 
             @Override
@@ -74,7 +74,7 @@ public class ImplementationTest {
 
             @Override
             public void addEdge(Edge edge) {
-
+                //
             }
 
             @Override
